@@ -1,4 +1,5 @@
 const car = (name, model, owner, year, image, phone) => ({name, model, owner, year, image, phone});
+const log =(text,type, date = new Date().toLocaleString()) => ({text,type, date});
 const cars = [
     car('Mersedes', 'Bens','Mariya',2015, 'img/mers.jpg','+7 983 631-01-77'),
     car('BMW', 'X6','Ivan',2016, 'img/bmw.jpg','+7 904 631-00-77'),
@@ -14,6 +15,7 @@ new Vue({
     data: {
         cars: cars,
         car: cars[1],
+        logs: [],
         selectedCarIndex: 0,
         phoneVisibility: false,
         search: '',
@@ -23,6 +25,14 @@ new Vue({
         selectCar(index){
             this.car = this.filteredCars[index];
             this.selectedCarIndex = index;
+        },
+        buyCar(){
+            this.modalVisibility=false;
+            this.logs.push(log(`Success order ${this.car.name}-${this.car.model}`,'ok'));
+        },
+        canselOrder(){
+            this.modalVisibility=false;
+            this.logs.push(log(`Canselled order ${this.car.name}-${this.car.model}`,'cnl'));
         }
     },
     computed: {
@@ -33,8 +43,6 @@ new Vue({
             return this.cars.filter(car=>{
                 return (car.name).toLowerCase().indexOf(this.search.toLowerCase())>-1||(car.model).toLowerCase().indexOf((this.search).toLowerCase())>-1;
             });
-        },
-
+        }
     }
-
-})
+});

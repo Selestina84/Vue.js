@@ -46,14 +46,59 @@
                             <li>Owner- <strong> {{car.owner}} </strong></li>
                         </ul>
                         <div class="phone-wrapper">
-                            <p v-if="phoneVisibility"> {{car.phone}} </p>
+                            <transition name="phone">
+                                <p v-if="phoneVisibility"> {{car.phone}} </p>
+                            </transition>
                         </div>
                             <button class="btn btn-outline-success mr-2" @click="phoneVisibility=!phoneVisibility">{{phoneBtnText}}</button>
-                            <button class="btn btn-primary" @click="modalVisibility=true">Buy</button>
+                            <button class="btn btn-primary" @click="modalVisibility=!modalVisibility">Buy</button>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row mt-3" v-if="logs.lengs!==0">
+            <div class="col-md-12">
+                <ul class="list-group">
+                    <li v-for="log in logs" 
+                        class="list-group-item" 
+                        :class = "{
+                            'list-group-item-secondary': log.type==='cnl',
+                            'list-group-item-success': log.type==='ok'
+                        }">
+                        {{log.text}} {{log.date}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <transition name="modal">
+            <div class="modal fade show" tabindex="-1" role="dialog" v-if="modalVisibility">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"@click="modalVisibility=!modalVisibility">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Current car - <strong>{{car.name}}</strong></h3>
+                        <ul>
+                            <li>Model- <strong> {{car.model}} </strong></li>
+                            <li>Year- <strong> {{car.year}} </strong></li>
+                            <li>Owner- <strong> {{car.owner}} </strong></li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" @click="buyCar">Buy</button>
+                      <button type="button" class="btn btn-secondary" @click="canselOrder">Cansel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </transition>
+        <transition name="fade">
+            <div class="modal-backdrop fade show" tabindex="-1" role="dialog" v-if="modalVisibility"></div>
+        </transition> 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="app.js"></script>

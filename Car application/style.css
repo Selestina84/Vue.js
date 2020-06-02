@@ -7,3 +7,35 @@
 .modal{
     display: block;
 }
+.phone-enter-active,
+.phone-leave-active{
+    transition: all 0.5s;
+}
+.phone-enter,
+.phone-leave-to{
+    transform: translateY(-30px);
+    opacity: 0
+}
+.modal-enter-active,
+.modal-leave-active{
+    transition: all 0.5s;
+}
+.modal-enter,
+.modal-leave-to{
+    transform: translateY(-250px);
+    opacity: 0
+}
+.fade-enter-active{
+    animation: fade 0.8s forwards;
+}
+.fade-leave-active{
+    animation: fade 0.8s reverse;
+}
+@keyframes fade{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 0.5;
+    }
+}
