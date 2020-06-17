@@ -7,13 +7,13 @@
           <ElOption label="outcome" value="OUTCOME"/>
         </ElSelect>
       </ElFormItem>
-       <ElFormItem label="Comment" prop="coment">
-         <ElInput v-model="formData.coment"/>
+       <ElFormItem label="Comment" prop="comment">
+         <ElInput v-model="formData.comment"/>
        </ElFormItem>
         <ElFormItem label="Value" prop="value">
          <ElInput v-model.number="formData.value"/>
        </ElFormItem>
-       <ElButton @click="onSubmit" type="primary">Submit</ElButton>
+       <ElButton @click="onSubmit" type="primary" plain size="medium">Add</ElButton>
     </ElForm>
   </ElCard>
 </template>
@@ -24,15 +24,16 @@ export default {
   data: () => ({
     formData: {
     type: "INCOME",
-    coment: '',
+    comment: '',
     value: 0
     },
     rules: {
       type: [],
-      coment: [{required:true, message:'Please input comment', trigger: 'change'}],
-      value: [{required:true, message:'Please input value', trigger: 'change'},
-              {type: 'number', message:'Value must be a number', trigger: 'change'}
-      ],
+      comment: [{required:true, message:'Please input comment', trigger: 'change'}],
+      value: [
+        {required: true, message: ' Please input value', trigger: 'change' },
+        {type: 'number', message:'Value must be a number', trigger: 'change'}
+      ]
     }
   }),
   methods: {

@@ -1,14 +1,26 @@
 <template>
-  <div class="total-value">Balance: {{total}}</div>
+  <div class="total-value">
+    Balance:
+    <span :class="classBalans">{{ total }}</span>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'TotalBalance',
+  name: "TotalBalance",
   props: {
     total: {
       type: Number,
       default: 0
+    }
+  },
+  computed: {
+    classBalans() {
+      return {
+        "green": this.total > 0,
+        "black": this.total === 0,
+        "red": this.total < 0
+      }
     }
   }
 }
@@ -16,10 +28,19 @@ export default {
 
 <style scoped>
 .total-value{
-  font-style: 26px;
+  font-size: 18px;
   text-transform: uppercase;
   padding: 20px;
   text-align: center;
   font-weight: bold;
+}
+.total-value span {
+  font-size: 20px;
+  }
+.green {
+  color: green;
+}
+.red {
+  color: red;
 }
 </style>
